@@ -17,4 +17,9 @@
     bottom: 46px
     width: 100%
     overflow: hidden
+    .menu-wrapper
+      flex: 0 1 80px
+      height: 100%
+    .foods-wrapper
+      flex: 1
 </style>
