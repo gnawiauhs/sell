@@ -67,6 +67,8 @@
       font-size: 10px
       color: rgb(147, 153, 159)
     .cart-add
+      position: relative
+      z-index: 10
       display: inline-block
       padding: 6px
       line-height: 24px
