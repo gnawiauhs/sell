@@ -14,7 +14,7 @@
         <li v-for="(item,index) in goods" :key="index" class="food-list food-list-hook">
           <h1 class="title">{{item.name}}</h1>
           <ul>
-            <li v-for="(food,index) in item.foods" :key="index" class="food-item border-1px">
+            <li @click="selectFood(food,$event)" v-for="(food,index) in item.foods" :key="index" class="food-item border-1px">
               <div class="icon">
                 <img width="57" height="57" :src="food.icon">
               </div>
@@ -30,7 +30,7 @@
                   <span class="old" v-show="food.oldPrice">￥{{food.oldPrice}}</span>
                 </div>
                 <div class="cartcontrol-wrapper">
-                  <cartcontrol @cartAdd="_cartAdd" :food="food"></cartcontrol>
+                  <cartcontrol @add="addFood" :food="food"></cartcontrol>
                 </div>
               </div>
             </li>
@@ -39,6 +39,7 @@
       </ul>
     </div>
     <shopcart ref="shopcart" :select-foods="selectFoods" :delivery-price="seller.deliveryPrice" :min-price="seller.minPrice"></shopcart>
+    <food @add="addFood" :food="selectedFood" ref="food"></food>
   </div>
 </template>
 
@@ -46,6 +47,7 @@
   import BScroll from 'better-scroll'
   import shopcart from 'components/shopcart/shopcart'
   import cartcontrol from 'components/cartcontrol/cartcontrol'
+  import food from 'components/food/food'
   const ERR_OK = 0
   export default {
     props: {
@@ -57,7 +59,8 @@
       return {
         goods: [],
         listHeight: [],
-        scrollY: 0
+        scrollY: 0,
+        selectedFood: {}
       }
     },
     computed: {
@@ -124,16 +127,21 @@
         let el = foodList[index]
         this.foodsScroll.scrollToElement(el, 300)
       },
+      selectFood(food, event) {
+        this.selectedFood = food
+        this.$refs.food.show()
+      },
       _drop(target) {
         this.$refs.shopcart.drop(target)
       },
-      _cartAdd(target) {
+      addFood(target) {
         this._drop(target)
       }
     },
     components: {
       shopcart,
-      cartcontrol
+      cartcontrol,
+      food
     }
   }
 </script>

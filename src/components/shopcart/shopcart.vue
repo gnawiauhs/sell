@@ -43,7 +43,7 @@
                   <span>￥{{food.price*food.count}}</span>
                 </div>
                 <div class="cartcontrol-wrapper">
-                  <cartcontrol @cartAdd="_cartAdd" :food="food"></cartcontrol>
+                  <cartcontrol @add="addFood" :food="food"></cartcontrol>
                 </div>
               </li>
             </ul>
@@ -129,7 +129,7 @@
         }
       },
       payClass() {
-        if (this.totalPrice > this.minPrice) {
+        if (this.totalPrice >= this.minPrice) {
           return 'enough'
         } else {
           return 'not-enough'
@@ -211,7 +211,7 @@
           el.style.display = 'none'
         }
       },
-      _cartAdd(target) {
+      addFood(target) {
         this.drop(target)
       },
       empty() {
