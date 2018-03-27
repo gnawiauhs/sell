@@ -216,7 +216,7 @@
         border-1px(rgba(7, 17, 27, 0.1))
         &:last-child
           border-none()
-          padding-bottom: 0
+          margin-bottom: 0
         .icon
           flex: 0 0 57px
           margin-right: 10px
